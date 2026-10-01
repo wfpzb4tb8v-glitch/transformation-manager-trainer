@@ -1,0 +1,10 @@
+{
+  "name":"Transformation Manager Trainer",
+  "short_name":"TM Trainer",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#f2f2f7",
+  "theme_color":"#0a84ff",
+  "lang":"de",
+  "icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
