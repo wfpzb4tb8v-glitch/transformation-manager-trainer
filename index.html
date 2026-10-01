@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a84ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="TM Trainer">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>KI Transformation Manager Trainer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+<header class="topbar">
+  <div><div class="eyebrow">IHK-Weiterbildung</div><h1>KI Transformation Manager Trainer</h1></div>
+  <button id="themeBtn" class="iconbtn" aria-label="Darstellung wechseln">◐</button>
+</header>
+
+<main id="main">
+<section id="dashboard" class="screen active">
+  <div class="hero card">
+    <div><span class="pill">OFFLINE · TRAINING</span><h2>Bereit für deine nächste Lernrunde?</h2>
+    <p>Trainiere systematisch für deinen Multiple-Choice-Test mit 40 Fragen.</p></div>
+    <button class="primary" onclick="startExam(40,true)">40-Fragen-Prüfung</button>
+  </div>
+  <div class="grid2">
+    <div class="metric card"><span>Trefferquote</span><strong id="accuracy">0 %</strong><small id="answered">0 Fragen</small></div>
+    <div class="metric card"><span>Lernserie</span><strong id="streak">0 Tage</strong><small>persönlicher Fortschritt</small></div>
+  </div>
+  <div class="card recommendation"><div class="sectiontitle">🎯 Deine Lernempfehlung</div><h3 id="weakTopic">Starte mit einem Training</h3><p id="weakText">Beantworte einige Fragen, damit die App deine persönlichen Lernfelder erkennt.</p><button class="secondary" onclick="startLearning(10)">Adaptive Lernrunde</button></div>
+  <div class="card"><div class="sectiontitle">Schnellstart</div><div class="actions">
+    <button onclick="startLearning(10)">10 Fragen</button><button onclick="startExam(20,false)">20 Fragen</button><button onclick="showErrors()">Meine Fehler</button>
+  </div></div>
+</section>
+
+<section id="exam" class="screen">
+  <div class="card">
+    <div class="examhead"><span id="examMode">Prüfung</span><span id="timer"></span></div>
+    <div class="progress"><i id="progressBar"></i></div>
+    <div class="questionmeta" id="qMeta"></div><h2 id="qText"></h2><div id="answers"></div>
+    <div class="examnav"><button class="secondary" id="backBtn">Zurück</button><button class="primary" id="nextBtn">Weiter</button></div>
+  </div>
+</section>
+
+<section id="result" class="screen">
+  <div class="card result"><span class="pill">AUSWERTUNG</span><h2>Prüfung abgeschlossen</h2><div class="score" id="score"></div><p id="scoreText"></p>
+  <div id="resultDetails"></div><button class="primary" onclick="showScreen('dashboard');renderDashboard()">Weiterlernen</button></div>
+</section>
+
+<section id="errors" class="screen">
+  <div class="card"><span class="pill">WIEDERHOLEN</span><h2>Meine Fehler</h2><p id="errorIntro"></p><button class="primary" onclick="startErrorTraining()">Fehler trainieren</button></div>
+  <div id="errorList"></div>
+</section>
+
+<section id="stats" class="screen">
+  <div class="card"><span class="pill">FORTSCHRITT</span><h2>Statistik</h2><div id="statsContent"></div></div>
+</section>
+</main>
+
+<nav class="tabbar">
+<button class="tab active" data-screen="dashboard">⌂<span>Lernen</span></button>
+<button class="tab" data-screen="examSetup">✓<span>Prüfung</span></button>
+<button class="tab" data-screen="errors">↻<span>Fehler</span></button>
+<button class="tab" data-screen="stats">▥<span>Statistik</span></button>
+</nav>
+
+<section id="examSetup" class="screen overlayScreen">
+<div class="card setup"><span class="pill">PRÜFUNG</span><h2>Wie möchtest du trainieren?</h2>
+<label>Fragen
+<select id="countSelect"><option value="10">10 · Schnelltraining</option><option value="20">20 · Standardtraining</option><option value="40" selected>40 · Prüfungssimulation</option></select></label>
+<label class="toggle"><input type="checkbox" id="timed" checked> 60-Minuten-Timer</label>
+<p class="note">Dies sind Trainings-/Simulationsfragen, keine offiziellen IHK-Prüfungsfragen.</p>
+<button class="primary" onclick="beginSelectedExam()">Training starten</button>
+</div></section>
+</div>
+<script src="app.js"></script>
+</body></html>
